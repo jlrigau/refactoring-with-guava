@@ -1,7 +1,8 @@
 package fr.xebia.xke.dto;
 
 import com.google.common.collect.Lists;
-import fr.xebia.xke.model.Task;
+import fr.xebia.xke.model.Participants;
+import fr.xebia.xke.model.Product;
 import fr.xebia.xke.model.User;
 
 import java.math.BigDecimal;
@@ -20,6 +21,18 @@ public class ProductShortInfo extends BaseShortInfo {
     private String trader;
 
     private List<TaskShortInfo> tasks = Lists.newArrayList();
+
+    public ProductShortInfo(Product product) {
+        id = product.getId();
+        name = product.getName();
+        nominal = product.getNominal();
+
+        Participants participants = product.getParticipants();
+
+        sales = getParticipantName(participants.getSales());
+        pricer = getParticipantName(participants.getPricer());
+        trader = getParticipantName(participants.getSwapTrader());
+    }
 
     public String getName() {
         return name;
